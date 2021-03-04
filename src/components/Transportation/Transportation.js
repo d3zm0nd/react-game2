@@ -1,10 +1,13 @@
-import './Transportation.css';
+import './Transportation.scss';
 
 function Transportation() {
   return (
-    <>
-      Перевозки
-    </>
+    <div>
+      <h2 className="title">Активные перевозки</h2>
+      <div className="panel">
+        Перевозки
+      </div>
+    </div>
   );
 }
 

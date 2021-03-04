@@ -2,7 +2,7 @@ import './Storage.scss';
 
 function Storage(props) {
 
-  const findGoodById = (id) => {
+  const getNameGoodById = (id) => {
     return props.goods.find((item) => {
       return item.id === id;
     }).title;
@@ -10,9 +10,9 @@ function Storage(props) {
 
   const getEmptyCells = (count) => {
     if (count < 8) {
-      return Array(8-count).fill().map(() => {
+      return Array(8 - count).fill().map(() => {
         return (
-          <li className='good-item'></li>
+          <li className='good-item no-item'></li>
         )
       })
     }
@@ -26,8 +26,9 @@ function Storage(props) {
         <ul className="goods">
           {props.storage.map((item) => {
             return (
-              <li className="good-item">
-                {findGoodById(item.id)}, {item.qty} шт.</li>
+              <li key={item.id} className={`good-item item-${item.id}`}>
+                <span className="good-description">{item.qty} шт.</span>
+              </li>
             )
           })}
 

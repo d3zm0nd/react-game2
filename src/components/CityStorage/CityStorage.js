@@ -1,10 +1,13 @@
-import './CityStorage.css';
+import './CityStorage.scss';
 
 function CityStorage() {
   return (
-    <>
-      Городской склад
-    </>
+    <div>
+      <h2 className="title">Городской склад</h2>
+      <div className="panel">
+        Товары
+      </div>
+    </div>
   );
 }
 

@@ -1,82 +1,83 @@
 import './CityStorage.scss';
 import { Line } from 'react-chartjs-2';
 
-const data = {
-  labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
-  datasets: [
-    {
-      label: "Цена за шт.",
-      data: [12, 19, 3, 5, 2, 3, 14],
-      fill: false,
-      backgroundColor: "#a68156",
-      borderColor: "rgba(166, 129, 86, 0.2)",
+function CityStorage(props) {
+  const options = {
+    legend: {
+      display: false,
     },
-  ],
-};
+    maintainAspectRatio: false,
 
-const options = {
-  legend: {
-    display: false,
-  },
-  maintainAspectRatio: false,
+    tooltips: {
+      mode: "index",
+      intersect: false,
+      caretSize: 5,
 
-  tooltips: {
-    mode: "index",
-    intersect: false,
-    caretSize: 5,
+      backgroundColor: "#44200c",
+      bodyFontColor: "#a68156",
+      borderColor: "#877f72",
+      borderWidth: 1,
+      displayColors: false,
 
-    backgroundColor: "#44200c",
-    bodyFontColor: "#a68156",
-    borderColor: "#877f72",
-    borderWidth: 1,
-    displayColors: false,
-
-    callbacks: {
-      title() {
-        return "";
+      callbacks: {
+        title() {
+          return "";
+        },
       },
     },
-  },
 
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: false,
+          },
+          gridLines: {
+            display: false,
+          },
         },
-        gridLines: {
-          display: false,
+      ],
+      xAxes: [
+        {
+          ticks: {
+            display: false,
+          },
         },
-      },
-    ],
-    xAxes: [
-      {
-        ticks: {
-          display: false,
-        },
-      },
-    ],
-  },
-};
+      ],
+    },
+  };
 
-function CityStorage() {
+  const getGoodData = (priceStats) => {
+    return {
+      labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      datasets: [
+        {
+          data: priceStats,
+          label: "Цена за шт.",
+          fill: false,
+          backgroundColor: "#a68156",
+          borderColor: "rgba(166, 129, 86, 0.2)",
+        },
+      ],
+    };
+
+  }
+
   return (
     <div>
       <h2 className="title">Городской склад</h2>
       <div className="panel">
         <div className="city-goods">
-          <div className="good-item-wrapper">
-            <div className="good-item item-1"></div>
-            <div className="good-item-stats">
-              <Line data={data} options={options}/>
-            </div>
-          </div>
-          <div className="good-item-wrapper">
-            <div className="good-item item-2"></div>
-            <div className="good-item-stats">
-              <Line data={data} options={options}/>
-            </div>
-          </div>
+          {props.storage.map((good) => {
+            return (
+              <div className="good-item-wrapper">
+                <div className={`good-item item-${good.id}`} />
+                <div className="good-item-stats">
+                  <Line data={getGoodData(good.priceStats)} options={options} />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -84,4 +85,3 @@ function CityStorage() {
 }
 
 export default CityStorage;
-

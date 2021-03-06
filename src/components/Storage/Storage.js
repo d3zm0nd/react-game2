@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import './Storage.scss';
 
 function Storage(props) {
+
+  const [qty, setQty] = useState(0);
 
   const getNameGoodById = (id) => {
     return props.goods.find((item) => {
@@ -26,14 +29,45 @@ function Storage(props) {
         <ul className="goods">
           {props.storage.map((item) => {
             return (
-              <li key={item.id} className={`good-item item-${item.id}`}>
-                <span className="good-description">{item.qty} шт.</span>
+              <li
+                key={item.id}
+                className={`good-item 
+                item-${item.id} 
+                ${props.selectedGood === item.id ? 'selected' : ''}`}
+                onClick={() => {
+                  props.onSelectedGood(item.id);
+                }}
+              >
+                <span className="good-description">
+                  {item.qty} шт.
+                </span>
               </li>
             )
           })}
 
           {getEmptyCells(props.storage.length)}
         </ul>
+
+        {props.selectedGood ? (
+          <div className="sell-panel">
+            {getNameGoodById(props.selectedGood)}
+            <div className="controls">
+              <input type="text"
+                className="input"
+                value={qty}
+                onChange={(ev) => {
+                  setQty(parseInt(ev.target.value, 10));
+                }}
+              ></input> шт.
+              <button className="button"
+                onClick={() => {
+                  props.onSell(props.selectedGood, qty);
+                }}>
+                Продать
+              </button>
+            </div>
+          </div>
+        ) : ''}
       </div>
     </div>
   );

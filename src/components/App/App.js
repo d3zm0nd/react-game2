@@ -53,6 +53,9 @@ function App() {
       ],
     },
   ]);
+  const [money, setMoney] = useState(1000);
+  const [days, setDays] = useState(1);
+  const [selectedGood, setSelectedGood] = useState(1)
 
   const goods = [
     {
@@ -113,8 +116,24 @@ function App() {
     },
   ];
 
-  const [money, setMoney] = useState(1000);
-  const [days, setDays] = useState(1);
+  const sellGoods = (goodId, qty) => {
+    const cityStorage = storages.find((storage) => {
+      return storage.cityId === currentCity;
+    });
+
+    if (cityStorage) {
+      const currentGood = cityStorage.storage.find((good) => {
+        return good.id === goodId;
+      });
+
+      if (currentGood) {
+        currentGood.qty -= qty;
+        setMoney(money + qty * 10);
+      }
+    }
+
+    setStorages(storages);
+  }
 
   const getStorageByCity = () => {
     const store = storages.find((storage) => {
@@ -126,6 +145,14 @@ function App() {
       return [];
     }
   }
+
+  const liveProcess = () => {
+    setTimeout(() => {
+      setDays(days + 1);
+    }, 5000);
+  }
+
+  liveProcess();
 
   return (
     <div className="app">
@@ -142,11 +169,24 @@ function App() {
       <div className="content">
         <div className="column">
           <div className="storage">
-            <Storage currentCity={currentCity} storage={getStorageByCity()} goods={goods} />
+            <Storage
+              currentCity={currentCity}
+              storage={getStorageByCity()}
+              selectedGood={selectedGood}
+              goods={goods}
+              onSelectedGood={(goodId) => {
+                setSelectedGood(goodId);
+              }}
+              onSell={(goodIt, qty) => {
+                sellGoods(goodIt, qty);
+              }}
+            />
           </div>
           <div className="transportation">
             <Transportation />
-            <Stats days={5} money={money}/>
+            <Stats
+              days={days}
+              money={money} />
           </div>
         </div>
         <div className="column">

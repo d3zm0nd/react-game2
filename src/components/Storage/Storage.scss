@@ -92,3 +92,46 @@
           }
     }
 }
+
+.sell-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+
+  .input {
+    background: none;
+    width: 30px;
+    border: 1px solid #877f72;
+    color: #a68156;
+    margin-right: 5px;
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+
+  .button {
+    background: #44200c;
+    color: #a68156;
+    border: 1px solid #877f72;
+    font-size: 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    
+    &:hover {
+      color: white;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}

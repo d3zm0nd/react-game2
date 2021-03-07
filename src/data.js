@@ -2,10 +2,6 @@ export const storagesData = [{
   cityId: 1,
   goods: [
     {
-      id: 1,
-      qty: 10,
-    },
-    {
       id: 2,
       qty: 20,
     },

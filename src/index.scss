@@ -5,3 +5,31 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
 }
+
+input {
+  box-sizing: border-box;
+
+  &:focus,
+  &:active {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.button {
+  background: #44200c;
+  color: #a68156;
+  border: 1px solid #877f72;
+  font-size: 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  
+  &:hover {
+    color: white;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}

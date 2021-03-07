@@ -109,29 +109,6 @@
     border: 1px solid #877f72;
     color: #a68156;
     margin-right: 5px;
-
-    &:focus,
-    &:active {
-      box-shadow: none;
-      outline: none;
-    }
   }
 
-  .button {
-    background: #44200c;
-    color: #a68156;
-    border: 1px solid #877f72;
-    font-size: 12px;
-    margin-left: 10px;
-    cursor: pointer;
-    
-    &:hover {
-      color: white;
-    }
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
-  }
 }
